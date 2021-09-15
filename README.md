@@ -10,6 +10,10 @@ What this basically does is display key-value data, with some additional feature
 - supports configurable label alignment;
 - supports custom value rendering.
 
+<p align="left">
+	<img align="center" src="https://raw.githubusercontent.com/alexboia/LVD-FluentUi-PropertySheet/main/docs/Capture.png" style="margin-bottom: 20px; margin-right: 20px; border-radius: 5px;" />
+</p>
+
 ## Installation
 <a name="c-installation"></a>
 
