@@ -20,14 +20,14 @@ export default class PropertySheet extends React.Component {
 	
 	render() {
 		return (
-			<div className={this._computeContainerClassName()}>
+			<div className={this._computeContainerClassName()} style={this._getStyle()}>
 				{this._renderItems()}
 			</div>
 		);
 	}
 
-	_getLabelAlignment() {
-		return this.props.labelAlignment || PropertySheetLabelAlignments.right;
+	_getStyle() {
+		return this.props.style || {};
 	}
 
 	_computeContainerClassName() {
@@ -104,11 +104,9 @@ export default class PropertySheet extends React.Component {
 	_renderItemLabel(item, itemIndex) {
 		const renderer = this._getItemLabelRenderer();
 		const labelAlignment = this._getLabelAlignment();
-		const labelAlignmentClassName = this._computeLabelAlignmentCssClassName(labelAlignment);
-		const labelClassName = `ms-Grid-col ms-sm6 ms-md6 ms-lg4 lvd-propertysheet-key-value-item-key ${labelAlignmentClassName}`;
 
 		return (
-			<div className={labelClassName}>
+			<div className={this._computeLabelClassName(labelAlignment)}>
 				{renderer(item, itemIndex)}
 			</div>
 		);
@@ -122,7 +120,26 @@ export default class PropertySheet extends React.Component {
 		return item.label;
 	}
 
-	_computeLabelAlignmentCssClassName(labelAlignment) {
+	_getLabelAlignment() {
+		return this.props.labelAlignment || PropertySheetLabelAlignments.right;
+	}
+
+	_computeLabelClassName(labelAlignment) {
+		let labelClassName = [ 'ms-Grid-col' ];
+
+		if (!this._isLabelOnly()) {	
+			labelClassName.push('ms-sm6 ms-md6 ms-lg4');
+		} else {
+			labelClassName.push('ms-sm12');
+		}
+
+		labelClassName.push('lvd-propertysheet-key-value-item-key');
+		labelClassName.push(this._computeLabelAlignmentClassName(labelAlignment));
+
+		return labelClassName;
+	}
+
+	_computeLabelAlignmentClassName(labelAlignment) {
 		switch (labelAlignment) {
 			case PropertySheetLabelAlignments.left: 
 				return 'lvd-propertysheet-align-left';
@@ -213,6 +230,7 @@ export default class PropertySheet extends React.Component {
 
 PropertySheet.propTypes = {
 	className: PropTypes.string,
+	style: PropTypes.object,
 	items: PropTypes.arrayOf(PropTypes.object).isRequired,
 	labelOnly: PropTypes.bool,
 	labelAlignment: PropTypes.string,

@@ -29,6 +29,7 @@ export default class App extends React.Component {
 					items={this._getSampleItems()}
 					labelAlignment={PropertySheetLabelAlignments.right}
 					underlineValueLinks={false}
+					style={{width: 300}}
 					onValueItemActionInvoked={this._handleValueItemActionInvoked}
 				/>
 			</div>

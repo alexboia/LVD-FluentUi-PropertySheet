@@ -69,13 +69,14 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("div", {
-        className: this._computeContainerClassName()
+        className: this._computeContainerClassName(),
+        style: this._getStyle()
       }, this._renderItems());
     }
   }, {
-    key: "_getLabelAlignment",
-    value: function _getLabelAlignment() {
-      return this.props.labelAlignment || _PropertySheetLabelAlignments__WEBPACK_IMPORTED_MODULE_9__["default"].right;
+    key: "_getStyle",
+    value: function _getStyle() {
+      return this.props.style || {};
     }
   }, {
     key: "_computeContainerClassName",
@@ -159,11 +160,8 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
 
       var labelAlignment = this._getLabelAlignment();
 
-      var labelAlignmentClassName = this._computeLabelAlignmentCssClassName(labelAlignment);
-
-      var labelClassName = "ms-Grid-col ms-sm6 ms-md6 ms-lg4 lvd-propertysheet-key-value-item-key ".concat(labelAlignmentClassName);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("div", {
-        className: labelClassName
+        className: this._computeLabelClassName(labelAlignment)
       }, renderer(item, itemIndex));
     }
   }, {
@@ -177,8 +175,28 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
       return item.label;
     }
   }, {
-    key: "_computeLabelAlignmentCssClassName",
-    value: function _computeLabelAlignmentCssClassName(labelAlignment) {
+    key: "_getLabelAlignment",
+    value: function _getLabelAlignment() {
+      return this.props.labelAlignment || _PropertySheetLabelAlignments__WEBPACK_IMPORTED_MODULE_9__["default"].right;
+    }
+  }, {
+    key: "_computeLabelClassName",
+    value: function _computeLabelClassName(labelAlignment) {
+      var labelClassName = ['ms-Grid-col'];
+
+      if (!this._isLabelOnly()) {
+        labelClassName.push('ms-sm6 ms-md6 ms-lg4');
+      } else {
+        labelClassName.push('ms-sm12');
+      }
+
+      labelClassName.push('lvd-propertysheet-key-value-item-key');
+      labelClassName.push(this._computeLabelAlignmentClassName(labelAlignment));
+      return labelClassName;
+    }
+  }, {
+    key: "_computeLabelAlignmentClassName",
+    value: function _computeLabelAlignmentClassName(labelAlignment) {
       switch (labelAlignment) {
         case _PropertySheetLabelAlignments__WEBPACK_IMPORTED_MODULE_9__["default"].left:
           return 'lvd-propertysheet-align-left';
@@ -283,6 +301,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
 
 PropertySheet.propTypes = {
   className: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().string),
+  style: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().object),
   items: prop_types__WEBPACK_IMPORTED_MODULE_7___default().arrayOf((prop_types__WEBPACK_IMPORTED_MODULE_7___default().object)).isRequired,
   labelOnly: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().bool),
   labelAlignment: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().string),
