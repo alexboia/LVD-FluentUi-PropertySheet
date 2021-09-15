@@ -114,8 +114,8 @@ Each item must be a plain javascript object with the following properties:
 
 | Name | Type | Notes |
 | --- | --- | --- |
-| `label` | `string` | Mandatory. |
-| `value` | `string` | Optional. |
+| `label` | `string` | Displayable label. Mandatory. |
+| `value` | `string` | Displayable value. Optional. |
 | `formatAsCode` | `boolean` | Render this item as a code block. Optional. Defaults to `false` |
 | `url` | `string` | Render this item as a link with this url. Optional. Defaults to `null` |
 | `action` | `Property Sheet Data Item Action Object` | Action descriptor for when an action icon button needs to be rendered next to the raw value. See below. Optional. Defaults to `null`. |
@@ -126,7 +126,7 @@ Each item action descriptor must be a plain javascript object with the following
 
 | Name | Type | Notes |
 | --- | --- | --- |
-| `code` | `string` | Mandatory. |
+| `code` | `string` | Action code. Can be later used when listening for actions via `onValueItemActionInvoked`. Mandatory. |
 | `icon` | `string` | Must be a valid FluentUi icon name. Mandatory. |
 
 ## Events
