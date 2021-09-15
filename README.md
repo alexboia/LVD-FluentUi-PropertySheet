@@ -104,6 +104,7 @@ npm run build
 | Set additional container css class name | `className` | `string` | Defaults to `null`. |
 | Set additional inline css style properties | `style` | `object` | Key-value plain javascript object. Defaults to `{}`. |
 | Only show label fields | `labelOnly` | `boolean` | Defaults to false. |
+| Change label alignment | `labelAlignment` | `PropertySheetLabelAlignments` | See [here for all supported values](https://github.com/alexboia/LVD-FluentUi-PropertySheet/blob/main/src/components/PropertySheetLabelAlignments.js). Defaults to `PropertySheetLabelAlignments.right`. |
 | Display underlines for values that are rendered as links | `underlineValueLinks` | `boolean` | Defaults to `false`. |
 | Provide custom label renderer | `onRenderLabel` | `(item: Property Sheet Data Item Object, itemIndex: number) => JSX.Element` | Defaults to `null`. |
 | Provide custom value renderer | `onRenderValue` | `(item: Property Sheet Data Item Object, itemIndex: number) => JSX.Element` | Defaults to `null`. |
