@@ -225,29 +225,51 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "_defaultValueRenderer",
     value: function _defaultValueRenderer(item, itemIndex) {
-      var renderedValue = null;
+      var renderedActualValue = this._renderActualValue(item, itemIndex);
+
+      var renderedValueActionButton = this._renderValueActionButton(item, itemIndex);
+
+      var output = [renderedActualValue];
+
+      if (renderedValueActionButton != null) {
+        output.push(renderedValueActionButton);
+      }
+
+      return output;
+    }
+  }, {
+    key: "_renderActualValue",
+    value: function _renderActualValue(item, itemIndex) {
+      var renderedActualValue = null;
       var rawValue = item.value || null;
 
       if (this._hasUrl(item)) {
-        renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_8__.Link, {
+        renderedActualValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_8__.Link, {
           key: "lvd-propertysheet-item-value",
           href: item.url,
           underline: this._shouldUnderlineValueLinks()
         }, rawValue);
       } else {
-        renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("span", {
+        renderedActualValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("span", {
           key: "lvd-propertysheet-item-value"
         }, rawValue);
       }
 
       if (this._shouldFormatValuesAsCode(item)) {
-        renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("code", null, renderedValue);
+        renderedActualValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("code", {
+          key: "lvd-propertysheet-item-value-wrapper"
+        }, renderedActualValue);
       }
 
-      var renderedValueAction = null;
+      return renderedActualValue;
+    }
+  }, {
+    key: "_renderValueActionButton",
+    value: function _renderValueActionButton(item, itemIndex) {
+      var renderedValueActionButton = null;
 
       if (this._hasAction(item)) {
-        renderedValueAction = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_8__.IconButton, {
+        renderedValueActionButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_8__.IconButton, {
           key: "lvd-propertysheet-item-value-action",
           iconProps: {
             iconName: item.action.icon
@@ -256,13 +278,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
         });
       }
 
-      var output = [renderedValue];
-
-      if (renderedValueAction != null) {
-        output.push(renderedValueAction);
-      }
-
-      return output;
+      return renderedValueActionButton;
     }
   }, {
     key: "_hasUrl",

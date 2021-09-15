@@ -4092,9 +4092,7 @@ var App = /*#__PURE__*/function (_React$Component) {
 
       this._log(item);
 
-      this._log('Item index was:');
-
-      this._log(itemIndex);
+      this._log("Item index was: ".concat(itemIndex));
     }
   }, {
     key: "_log",
@@ -4110,9 +4108,6 @@ var App = /*#__PURE__*/function (_React$Component) {
         items: this._getSampleItems(),
         labelAlignment: _components_PropertySheetLabelAlignments_js__WEBPACK_IMPORTED_MODULE_8__["default"].right,
         underlineValueLinks: false,
-        style: {
-          width: 300
-        },
         onValueItemActionInvoked: this._handleValueItemActionInvoked
       }));
     }
@@ -4140,7 +4135,15 @@ var App = /*#__PURE__*/function (_React$Component) {
         }
       }, {
         label: 'Test 5',
-        value: 'Value 5'
+        value: 'Value 5 - Value that is rather long-ish, even if I say so myself.'
+      }, {
+        label: 'Test 6 - label that is rather long-ish',
+        value: 'Value 6',
+        formatAsCode: false,
+        action: {
+          code: 'delete',
+          icon: 'Delete'
+        }
       }];
     }
   }]);
@@ -4436,29 +4439,51 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "_defaultValueRenderer",
     value: function _defaultValueRenderer(item, itemIndex) {
-      var renderedValue = null;
+      var renderedActualValue = this._renderActualValue(item, itemIndex);
+
+      var renderedValueActionButton = this._renderValueActionButton(item, itemIndex);
+
+      var output = [renderedActualValue];
+
+      if (renderedValueActionButton != null) {
+        output.push(renderedValueActionButton);
+      }
+
+      return output;
+    }
+  }, {
+    key: "_renderActualValue",
+    value: function _renderActualValue(item, itemIndex) {
+      var renderedActualValue = null;
       var rawValue = item.value || null;
 
       if (this._hasUrl(item)) {
-        renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_9__.Link, {
+        renderedActualValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_9__.Link, {
           key: "lvd-propertysheet-item-value",
           href: item.url,
           underline: this._shouldUnderlineValueLinks()
         }, rawValue);
       } else {
-        renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("span", {
+        renderedActualValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("span", {
           key: "lvd-propertysheet-item-value"
         }, rawValue);
       }
 
       if (this._shouldFormatValuesAsCode(item)) {
-        renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("code", null, renderedValue);
+        renderedActualValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement("code", {
+          key: "lvd-propertysheet-item-value-wrapper"
+        }, renderedActualValue);
       }
 
-      var renderedValueAction = null;
+      return renderedActualValue;
+    }
+  }, {
+    key: "_renderValueActionButton",
+    value: function _renderValueActionButton(item, itemIndex) {
+      var renderedValueActionButton = null;
 
       if (this._hasAction(item)) {
-        renderedValueAction = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_10__.IconButton, {
+        renderedValueActionButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6__.createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_10__.IconButton, {
           key: "lvd-propertysheet-item-value-action",
           iconProps: {
             iconName: item.action.icon
@@ -4467,13 +4492,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
         });
       }
 
-      var output = [renderedValue];
-
-      if (renderedValueAction != null) {
-        output.push(renderedValueAction);
-      }
-
-      return output;
+      return renderedValueActionButton;
     }
   }, {
     key: "_hasUrl",

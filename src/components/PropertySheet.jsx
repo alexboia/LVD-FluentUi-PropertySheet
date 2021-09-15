@@ -164,28 +164,44 @@ export default class PropertySheet extends React.Component {
 	}
 
 	_defaultValueRenderer(item, itemIndex) {
-		let renderedValue = null;
+		let renderedActualValue = this._renderActualValue(item, itemIndex);
+		let renderedValueActionButton = this._renderValueActionButton(item, itemIndex);
+
+		const output = [renderedActualValue];
+		if (renderedValueActionButton != null) {
+			output.push(renderedValueActionButton);
+		}
+		
+		return output;
+	}
+
+	_renderActualValue(item, itemIndex) {
+		let renderedActualValue = null;
 		const rawValue = item.value || null;
 
 		if (this._hasUrl(item)) {
-			renderedValue = (
+			renderedActualValue = (
 				<Link key="lvd-propertysheet-item-value" 
 					href={item.url} 
 					underline={this._shouldUnderlineValueLinks()}>{rawValue}</Link>
 			);
 		} else {
-			renderedValue = (
+			renderedActualValue = (
 				<span key="lvd-propertysheet-item-value">{rawValue}</span>
 			);
 		}
 
 		if (this._shouldFormatValuesAsCode(item)) {
-			renderedValue = (<code>{renderedValue}</code>);
+			renderedActualValue = (<code key="lvd-propertysheet-item-value-wrapper">{renderedActualValue}</code>);
 		}
 
-		let renderedValueAction = null;
+		return renderedActualValue;
+	}
+
+	_renderValueActionButton(item, itemIndex) {
+		let renderedValueActionButton = null;
 		if (this._hasAction(item)) {
-			renderedValueAction = (
+			renderedValueActionButton = (
 				<IconButton 
 					key="lvd-propertysheet-item-value-action"
 					iconProps={{ iconName: item.action.icon }} 
@@ -193,13 +209,7 @@ export default class PropertySheet extends React.Component {
 				/>
 			);
 		}
-
-		const output = [renderedValue];
-		if (renderedValueAction != null) {
-			output.push(renderedValueAction);
-		}
-		
-		return output;
+		return renderedValueActionButton;
 	}
 
 	_hasUrl(item) {

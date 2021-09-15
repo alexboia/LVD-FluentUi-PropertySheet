@@ -14,8 +14,7 @@ export default class App extends React.Component {
 	_handleValueItemActionInvoked(item, itemIndex, event) {
 		this._log('Item action invoked. Item was:');
 		this._log(item);
-		this._log('Item index was:');
-		this._log(itemIndex);
+		this._log(`Item index was: ${itemIndex}`);
 	}
 
 	_log(message) {
@@ -29,7 +28,6 @@ export default class App extends React.Component {
 					items={this._getSampleItems()}
 					labelAlignment={PropertySheetLabelAlignments.right}
 					underlineValueLinks={false}
-					style={{width: 300}}
 					onValueItemActionInvoked={this._handleValueItemActionInvoked}
 				/>
 			</div>
@@ -42,7 +40,8 @@ export default class App extends React.Component {
 			{ label: 'Test 2', value: 'Value 2', formatAsCode: true },
 			{ label: 'Test 3', value: 'Value 3', url: 'http://alexboia.net' },
 			{ label: 'Test 4', value: 'Value 4', formatAsCode: true, action: { code: 'Edit', icon: 'Edit' } },
-			{ label: 'Test 5', value: 'Value 5' }
+			{ label: 'Test 5', value: 'Value 5 - Value that is rather long-ish, even if I say so myself.' },
+			{ label: 'Test 6 - label that is rather long-ish', value: 'Value 6', formatAsCode: false, action: { code: 'delete', icon: 'Delete' } }
 		];
 	}
 }
