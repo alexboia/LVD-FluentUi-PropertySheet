@@ -19395,9 +19395,11 @@ template {
 	margin-top: 0px;
 }
 
-.lvd-propertysheet-key-value-item-value pre {
+.lvd-propertysheet-key-value-item-value pre,
+.lvd-propertysheet-key-value-item-value code {
 	margin: 0;
 	padding: 0;
+	display: inline-block;
 }
 
 .lvd-propertysheet-key-value-item-value .ms-Button {

@@ -8,7 +8,7 @@ export interface IPropertySheetDataItemAction {
 
 export interface IPropertySheetDataItem {
 	label: string,
-	value: string,
+	value?: string,
 	formatAsCode?: boolean,
 	url?: string,
 	action?: IPropertySheetDataItemAction

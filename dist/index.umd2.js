@@ -226,17 +226,22 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
     key: "_defaultValueRenderer",
     value: function _defaultValueRenderer(item, itemIndex) {
       var renderedValue = null;
+      var rawValue = item.value || null;
 
       if (this._hasUrl(item)) {
         renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_8__.Link, {
           key: "lvd-propertysheet-item-value",
           href: item.url,
           underline: this._shouldUnderlineValueLinks()
-        }, item.value);
+        }, rawValue);
       } else {
         renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("span", {
           key: "lvd-propertysheet-item-value"
-        }, item.value);
+        }, rawValue);
+      }
+
+      if (this._shouldFormatValuesAsCode()) {
+        renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("code", null, renderedValue);
       }
 
       var renderedValueAction = null;
@@ -257,7 +262,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
         output.push(renderedValueAction);
       }
 
-      return this._shouldFormatValuesAsCode(item) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("code", null, output) : output;
+      return output;
     }
   }, {
     key: "_hasUrl",

@@ -165,14 +165,20 @@ export default class PropertySheet extends React.Component {
 
 	_defaultValueRenderer(item, itemIndex) {
 		let renderedValue = null;
+		const rawValue = item.value || null;
+
 		if (this._hasUrl(item)) {
 			renderedValue = (
-				<Link key="lvd-propertysheet-item-value" href={item.url} underline={this._shouldUnderlineValueLinks()}>{item.value}</Link>
+				<Link key="lvd-propertysheet-item-value" href={item.url} underline={this._shouldUnderlineValueLinks()}>{rawValue}</Link>
 			);
 		} else {
 			renderedValue = (
-				<span key="lvd-propertysheet-item-value">{item.value}</span>
+				<span key="lvd-propertysheet-item-value">{rawValue}</span>
 			);
+		}
+
+		if (this._shouldFormatValuesAsCode()) {
+			renderedValue = (<code>{renderedValue}</code>);
 		}
 
 		let renderedValueAction = null;
@@ -191,9 +197,7 @@ export default class PropertySheet extends React.Component {
 			output.push(renderedValueAction);
 		}
 		
-		return this._shouldFormatValuesAsCode(item)
-			? <code>{output}</code> 
-			: output;
+		return output;
 	}
 
 	_hasUrl(item) {
