@@ -108,6 +108,27 @@ npm run build
 | Provide custom label renderer | `onRenderLabel` | `(item: Property Sheet Data Item Object, itemIndex: number) => JSX.Element` | Defaults to `null`. |
 | Provide custom value renderer | `onRenderValue` | `(item: Property Sheet Data Item Object, itemIndex: number) => JSX.Element` | Defaults to `null`. |
 
+### Property Sheet Data Item Object
+
+Each item must be a plain javascript object with the following properties:
+
+| Name | Type | Notes |
+| --- | --- | --- |
+| `label` | `string` | Mandatory. |
+| `value` | `string` | Optional. |
+| `formatAsCode` | `boolean` | Render this item as a code block. Optional. Defaults to `false` |
+| `url` | `string` | Render this item as a link with this url. Optional. Defaults to `null` |
+| `action` | `Property Sheet Data Item Action Object` | Action descriptor for when an action icon button needs to be rendered next to the raw value. See below. Optional. Defaults to `null`. |
+
+### Property Sheet Data Item Action Object
+
+Each item action descriptor must be a plain javascript object with the following properties:
+
+| Name | Type | Notes |
+| --- | --- | --- |
+| `code` | `string` | Mandatory. |
+| `icon` | `string` | Must be a valid FluentUi icon name. Mandatory. |
+
 ## Events
 <a name="c-events"></a>
 
