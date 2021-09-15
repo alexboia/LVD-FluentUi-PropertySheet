@@ -10,6 +10,15 @@
 	"bugs": {
 		"url": "https://github.com/alexboia/LVD-FluentUi-PropertySheet/issues"
 	},
+	"keywords": [
+		"react",
+		"reactjs",
+		"reactjs-components",
+		"property-sheets",
+		"fluentui",
+		"fluentui-component",
+		"fluentui-property-sheet"
+	],
 	"main": "dist/index.umd2.js",
 	"typings": "dist/index.d.ts",
 	"types": "dist/index.d.ts",
