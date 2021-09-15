@@ -1,17 +1,16 @@
-import { IStyle } from '@fluentui/react';
 import * as React from 'react';
 
 export interface IPropertySheetDataItemAction {
-	code: string,
-	icon: string
+	code: string;
+	icon: string;
 }
 
 export interface IPropertySheetDataItem {
-	label: string,
-	value?: string,
-	formatAsCode?: boolean,
-	url?: string,
-	action?: IPropertySheetDataItemAction
+	label: string;
+	value?: string;
+	formatAsCode?: boolean;
+	url?: string;
+	action?: IPropertySheetDataItemAction;
 }
 
 export enum PropertySheetLabelAlignments {
