@@ -100,12 +100,20 @@ npm run build
 
 | What | Prop Name | Type | Notes |
 | --- | --- | --- | --- |
+| Set items | `items` | `Property Sheet Data Item Object` | See below. Mandatory. |
+| Set additional container css class name | `className` | `string` | Defaults to `null`. |
+| Set additional inline css style properties | `style` | `object` | Key-value plain javascript object. Defaults to `{}`. |
+| Only show label fields | `labelOnly` | `boolean` | Defaults to false. |
+| Display underlines for values that are rendered as links | `underlineValueLinks` | `boolean` | Defaults to `false`. |
+| Provide custom label renderer | `onRenderLabel` | `(item: Property Sheet Data Item Object, itemIndex: number) => JSX.Element` | Defaults to `null`. |
+| Provide custom value renderer | `onRenderValue` | `(item: Property Sheet Data Item Object, itemIndex: number) => JSX.Element` | Defaults to `null`. |
 
 ## Events
 <a name="c-events"></a>
 
 | Event | Prop Name | Arguments | Notes |
 | --- | --- | --- | --- |
+| Item action invoked | `onValueItemActionInvoked` | `(item: Property Sheet Data Item Object, itemIndex: number, event: React.MouseEvent)` | Triggered when the action button related to a value is clicked. |
 
 ## Changelog
 <a name="c-changelog"></a>
@@ -119,3 +127,5 @@ npm run build
 
 I put some of my free time into developing and maintaining this plugin.
 If helped you in your projects and you are happy with it, you can...
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q01KGLM)
