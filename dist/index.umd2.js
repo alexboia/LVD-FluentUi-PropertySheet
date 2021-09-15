@@ -192,7 +192,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
 
       labelClassName.push('lvd-propertysheet-key-value-item-key');
       labelClassName.push(this._computeLabelAlignmentClassName(labelAlignment));
-      return labelClassName;
+      return labelClassName.join(' ');
     }
   }, {
     key: "_computeLabelAlignmentClassName",
@@ -240,7 +240,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
         }, rawValue);
       }
 
-      if (this._shouldFormatValuesAsCode()) {
+      if (this._shouldFormatValuesAsCode(item)) {
         renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("code", null, renderedValue);
       }
 

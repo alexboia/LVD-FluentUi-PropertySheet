@@ -136,7 +136,7 @@ export default class PropertySheet extends React.Component {
 		labelClassName.push('lvd-propertysheet-key-value-item-key');
 		labelClassName.push(this._computeLabelAlignmentClassName(labelAlignment));
 
-		return labelClassName;
+		return labelClassName.join(' ');
 	}
 
 	_computeLabelAlignmentClassName(labelAlignment) {
@@ -169,7 +169,9 @@ export default class PropertySheet extends React.Component {
 
 		if (this._hasUrl(item)) {
 			renderedValue = (
-				<Link key="lvd-propertysheet-item-value" href={item.url} underline={this._shouldUnderlineValueLinks()}>{rawValue}</Link>
+				<Link key="lvd-propertysheet-item-value" 
+					href={item.url} 
+					underline={this._shouldUnderlineValueLinks()}>{rawValue}</Link>
 			);
 		} else {
 			renderedValue = (
@@ -177,7 +179,7 @@ export default class PropertySheet extends React.Component {
 			);
 		}
 
-		if (this._shouldFormatValuesAsCode()) {
+		if (this._shouldFormatValuesAsCode(item)) {
 			renderedValue = (<code>{renderedValue}</code>);
 		}
 

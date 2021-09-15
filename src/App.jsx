@@ -41,7 +41,7 @@ export default class App extends React.Component {
 			{ label: 'Test 1', value: 'Value 1' },
 			{ label: 'Test 2', value: 'Value 2', formatAsCode: true },
 			{ label: 'Test 3', value: 'Value 3', url: 'http://alexboia.net' },
-			{ label: 'Test 4', value: 'Value 4', action: { code: 'Edit', icon: 'Edit' } },
+			{ label: 'Test 4', value: 'Value 4', formatAsCode: true, action: { code: 'Edit', icon: 'Edit' } },
 			{ label: 'Test 5', value: 'Value 5' }
 		];
 	}
