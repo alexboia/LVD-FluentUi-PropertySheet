@@ -39,7 +39,7 @@ export default class PropertySheet extends React.Component {
 		if (this._isLabelOnly()) {
 			containerClassName.push('lvd-propertysheet-key-value-listing-container-label-only');
 		} else {
-			containerClassName.push('lvd-propertysheet-key-value-listing-container-with-label');
+			containerClassName.push('lvd-propertysheet-key-value-listing-container-with-value');
 		}
 
 		const className = this._getClassName();
@@ -119,7 +119,7 @@ export default class PropertySheet extends React.Component {
 	}
 
 	_defaultLabelRenderer(item, itemIndex) {
-		return item.Label;
+		return item.label;
 	}
 
 	_computeLabelAlignmentCssClassName(labelAlignment) {
@@ -150,11 +150,11 @@ export default class PropertySheet extends React.Component {
 		let renderedValue = null;
 		if (this._hasUrl(item)) {
 			renderedValue = (
-				<Link key="lvd-propertysheet-item-value" href={item.Url} underline={this._shouldUnderlineValueLinks()}>{item.Value}</Link>
+				<Link key="lvd-propertysheet-item-value" href={item.url} underline={this._shouldUnderlineValueLinks()}>{item.value}</Link>
 			);
 		} else {
 			renderedValue = (
-				<span key="lvd-propertysheet-item-value">{item.Value}</span>
+				<span key="lvd-propertysheet-item-value">{item.value}</span>
 			);
 		}
 
@@ -163,7 +163,7 @@ export default class PropertySheet extends React.Component {
 			renderedValueAction = (
 				<IconButton 
 					key="lvd-propertysheet-item-value-action"
-					iconProps={{ iconName: item.Action.Icon }} 
+					iconProps={{ iconName: item.action.icon }} 
 					onClick={this._handleItemValueActionClicked.bind(this, item, itemIndex)}
 				/>
 			);
@@ -175,12 +175,12 @@ export default class PropertySheet extends React.Component {
 		}
 		
 		return this._shouldFormatValuesAsCode(item)
-			? <pre>{output}</pre> 
+			? <code>{output}</code> 
 			: output;
 	}
 
 	_hasUrl(item) {
-		return item.hasOwnProperty('Url') && !!item.Url;
+		return item.hasOwnProperty('url') && !!item.url;
 	}
 
 	_shouldUnderlineValueLinks() {
@@ -188,10 +188,10 @@ export default class PropertySheet extends React.Component {
 	}
 
 	_hasAction(item) {
-		return item.hasOwnProperty('Action') 
-			&& !!item.Action 
-			&& !!item.Action.Code 
-			&& !!item.Action.Icon;
+		return item.hasOwnProperty('action') 
+			&& !!item.action 
+			&& !!item.action.code 
+			&& !!item.action.icon;
 	}
 
 	_handleItemValueActionClicked(item, itemIndex, event) {
@@ -203,7 +203,7 @@ export default class PropertySheet extends React.Component {
 	}
 
 	_shouldFormatValuesAsCode(item) {
-		return item.hasOwnProperty('FormatAsCode') && !!item.FormatAsCode;
+		return item.hasOwnProperty('formatAsCode') && !!item.formatAsCode;
 	}
 
 	_renderClear() {

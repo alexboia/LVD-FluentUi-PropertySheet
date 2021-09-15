@@ -37,11 +37,11 @@ export default class App extends React.Component {
 
 	_getSampleItems() {
 		return [
-			{ Label: 'Test 1', Value: 'Value 1' },
-			{ Label: 'Test 2', Value: 'Value 2', FormatAsCode: true },
-			{ Label: 'Test 3', Value: 'Value 3', Url: 'http://alexboia.net' },
-			{ Label: 'Test 4', Value: 'Value 4', Action: { Code: 'Edit', Icon: 'Edit' } },
-			{ Label: 'Test 5', Value: 'Value 5' }
+			{ label: 'Test 1', value: 'Value 1' },
+			{ label: 'Test 2', value: 'Value 2', formatAsCode: true },
+			{ label: 'Test 3', value: 'Value 3', url: 'http://alexboia.net' },
+			{ label: 'Test 4', value: 'Value 4', action: { code: 'Edit', icon: 'Edit' } },
+			{ label: 'Test 5', value: 'Value 5' }
 		];
 	}
 }

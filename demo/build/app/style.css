@@ -19372,7 +19372,7 @@ template {
 	font-weight: normal;
 }
 
-.lvd-propertysheet-key-value-item-key::after {
+.lvd-propertysheet-key-value-item-container.lvd-propertysheet-key-value-listing-container-with-value .lvd-propertysheet-key-value-item-key::after {
 	content: ':';
 }
 

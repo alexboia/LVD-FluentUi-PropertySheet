@@ -85,7 +85,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
       if (this._isLabelOnly()) {
         containerClassName.push('lvd-propertysheet-key-value-listing-container-label-only');
       } else {
-        containerClassName.push('lvd-propertysheet-key-value-listing-container-with-label');
+        containerClassName.push('lvd-propertysheet-key-value-listing-container-with-value');
       }
 
       var className = this._getClassName();
@@ -174,7 +174,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "_defaultLabelRenderer",
     value: function _defaultLabelRenderer(item, itemIndex) {
-      return item.Label;
+      return item.label;
     }
   }, {
     key: "_computeLabelAlignmentCssClassName",
@@ -212,13 +212,13 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
       if (this._hasUrl(item)) {
         renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_8__.Link, {
           key: "lvd-propertysheet-item-value",
-          href: item.Url,
+          href: item.url,
           underline: this._shouldUnderlineValueLinks()
-        }, item.Value);
+        }, item.value);
       } else {
         renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("span", {
           key: "lvd-propertysheet-item-value"
-        }, item.Value);
+        }, item.value);
       }
 
       var renderedValueAction = null;
@@ -227,7 +227,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
         renderedValueAction = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_8__.IconButton, {
           key: "lvd-propertysheet-item-value-action",
           iconProps: {
-            iconName: item.Action.Icon
+            iconName: item.action.icon
           },
           onClick: this._handleItemValueActionClicked.bind(this, item, itemIndex)
         });
@@ -239,12 +239,12 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
         output.push(renderedValueAction);
       }
 
-      return this._shouldFormatValuesAsCode(item) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("pre", null, output) : output;
+      return this._shouldFormatValuesAsCode(item) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("code", null, output) : output;
     }
   }, {
     key: "_hasUrl",
     value: function _hasUrl(item) {
-      return item.hasOwnProperty('Url') && !!item.Url;
+      return item.hasOwnProperty('url') && !!item.url;
     }
   }, {
     key: "_shouldUnderlineValueLinks",
@@ -254,7 +254,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "_hasAction",
     value: function _hasAction(item) {
-      return item.hasOwnProperty('Action') && !!item.Action && !!item.Action.Code && !!item.Action.Icon;
+      return item.hasOwnProperty('action') && !!item.action && !!item.action.code && !!item.action.icon;
     }
   }, {
     key: "_handleItemValueActionClicked",
@@ -266,7 +266,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "_shouldFormatValuesAsCode",
     value: function _shouldFormatValuesAsCode(item) {
-      return item.hasOwnProperty('FormatAsCode') && !!item.FormatAsCode;
+      return item.hasOwnProperty('formatAsCode') && !!item.formatAsCode;
     }
   }, {
     key: "_renderClear",
