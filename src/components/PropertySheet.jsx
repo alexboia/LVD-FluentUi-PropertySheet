@@ -105,7 +105,7 @@ export default class PropertySheet extends React.Component {
 		const renderer = this._getItemLabelRenderer();
 		const labelAlignment = this._getLabelAlignment();
 		const labelAlignmentClassName = this._computeLabelAlignmentCssClassName(labelAlignment);
-		const labelClassName = `ms-Grid-col ms-sm6 ms-md4 lvd-propertysheet-key-value-item-key ${labelAlignmentClassName}`;
+		const labelClassName = `ms-Grid-col ms-sm6 ms-md6 ms-lg4 lvd-propertysheet-key-value-item-key ${labelAlignmentClassName}`;
 
 		return (
 			<div className={labelClassName}>
@@ -136,7 +136,7 @@ export default class PropertySheet extends React.Component {
 	_renderItemValue(item, itemIndex) {
 		const renderer = this._getItemValueRenderer();
 		return (
-			<div className="ms-Grid-col ms-sm6 ms-md8 lvd-propertysheet-key-value-item-value">
+			<div className="ms-Grid-col ms-sm6 ms-md6 ms-lg8 lvd-propertysheet-key-value-item-value">
 				{renderer(item, itemIndex)}
 			</div>
 		);

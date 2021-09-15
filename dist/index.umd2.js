@@ -161,7 +161,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
 
       var labelAlignmentClassName = this._computeLabelAlignmentCssClassName(labelAlignment);
 
-      var labelClassName = "ms-Grid-col ms-sm6 ms-md4 lvd-propertysheet-key-value-item-key ".concat(labelAlignmentClassName);
+      var labelClassName = "ms-Grid-col ms-sm6 ms-md6 ms-lg4 lvd-propertysheet-key-value-item-key ".concat(labelAlignmentClassName);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("div", {
         className: labelClassName
       }, renderer(item, itemIndex));
@@ -196,7 +196,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
       var renderer = this._getItemValueRenderer();
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("div", {
-        className: "ms-Grid-col ms-sm6 ms-md8 lvd-propertysheet-key-value-item-value"
+        className: "ms-Grid-col ms-sm6 ms-md6 ms-lg8 lvd-propertysheet-key-value-item-value"
       }, renderer(item, itemIndex));
     }
   }, {
