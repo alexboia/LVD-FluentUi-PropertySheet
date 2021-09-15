@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("prop-types"), require("react"));
+		module.exports = factory(require("@fluentui/react"), require("prop-types"), require("react"));
 	else if(typeof define === 'function' && define.amd)
-		define(["prop-types", "react"], factory);
+		define(["@fluentui/react", "prop-types", "react"], factory);
 	else if(typeof exports === 'object')
-		exports["PropertySheet"] = factory(require("prop-types"), require("react"));
+		exports["PropertySheet"] = factory(require("@fluentui/react"), require("prop-types"), require("react"));
 	else
-		root["PropertySheet"] = factory(root["PropTypes"], root["React"]);
-})(self, function(__WEBPACK_EXTERNAL_MODULE__12__, __WEBPACK_EXTERNAL_MODULE__11__) {
+		root["PropertySheet"] = factory(root["FluentUIReact"], root["PropTypes"], root["React"]);
+})(self, function(__WEBPACK_EXTERNAL_MODULE__13__, __WEBPACK_EXTERNAL_MODULE__12__, __WEBPACK_EXTERNAL_MODULE__11__) {
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ([
@@ -30,7 +30,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(12);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _PropertySheetLabelAlignments__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(13);
+/* harmony import */ var _fluentui_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(13);
+/* harmony import */ var _fluentui_react__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_fluentui_react__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _PropertySheetLabelAlignments__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(14);
 
 
 
@@ -41,6 +43,7 @@ __webpack_require__.r(__webpack_exports__);
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0,_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0,_babel_runtime_helpers_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__["default"])(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
 
 
 
@@ -72,7 +75,7 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "_getLabelAlignment",
     value: function _getLabelAlignment() {
-      return this.props.labelAlignment || _PropertySheetLabelAlignments__WEBPACK_IMPORTED_MODULE_8__["default"].right;
+      return this.props.labelAlignment || _PropertySheetLabelAlignments__WEBPACK_IMPORTED_MODULE_9__["default"].right;
     }
   }, {
     key: "_computeContainerClassName",
@@ -154,7 +157,14 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
     value: function _renderItemLabel(item, itemIndex) {
       var renderer = this._getItemLabelRenderer();
 
-      return renderer(item, itemIndex);
+      var labelAlignment = this._getLabelAlignment();
+
+      var labelAlignmentClassName = this._computeLabelAlignmentCssClassName(labelAlignment);
+
+      var labelClassName = "ms-Grid-col ms-sm6 ms-md4 lvd-propertysheet-key-value-item-key ".concat(labelAlignmentClassName);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("div", {
+        className: labelClassName
+      }, renderer(item, itemIndex));
     }
   }, {
     key: "_getItemLabelRenderer",
@@ -164,23 +174,16 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "_defaultLabelRenderer",
     value: function _defaultLabelRenderer(item, itemIndex) {
-      var labelAlignment = this._getLabelAlignment();
-
-      var labelAlignmentClassName = this._computeLabelAlignmentCssClassName(labelAlignment);
-
-      var labelClassName = "ms-Grid-col ms-sm6 ms-md4 lvd-propertysheet-key-value-item-key ".concat(labelAlignmentClassName);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("div", {
-        className: labelClassName
-      }, item.Label);
+      return item.Label;
     }
   }, {
     key: "_computeLabelAlignmentCssClassName",
     value: function _computeLabelAlignmentCssClassName(labelAlignment) {
       switch (labelAlignment) {
-        case _PropertySheetLabelAlignments__WEBPACK_IMPORTED_MODULE_8__["default"].left:
+        case _PropertySheetLabelAlignments__WEBPACK_IMPORTED_MODULE_9__["default"].left:
           return 'lvd-propertysheet-align-left';
 
-        case _PropertySheetLabelAlignments__WEBPACK_IMPORTED_MODULE_8__["default"].center:
+        case _PropertySheetLabelAlignments__WEBPACK_IMPORTED_MODULE_9__["default"].center:
           return 'lvd-propertysheet-align-center';
 
         default:
@@ -192,7 +195,9 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
     value: function _renderItemValue(item, itemIndex) {
       var renderer = this._getItemValueRenderer();
 
-      return renderer(item, itemIndex);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("div", {
+        className: "ms-Grid-col ms-sm6 ms-md8 lvd-propertysheet-key-value-item-value"
+      }, renderer(item, itemIndex));
     }
   }, {
     key: "_getItemValueRenderer",
@@ -202,9 +207,61 @@ var PropertySheet = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "_defaultValueRenderer",
     value: function _defaultValueRenderer(item, itemIndex) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("div", {
-        className: "ms-Grid-col ms-sm6 ms-md8 lvd-propertysheet-key-value-item-value"
-      }, this._shouldFormatValuesAsCode(item) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("pre", null, item.Value) : item.Value);
+      var renderedValue = null;
+
+      if (this._hasUrl(item)) {
+        renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_8__.Link, {
+          key: "lvd-propertysheet-item-value",
+          href: item.Url,
+          underline: this._shouldUnderlineValueLinks()
+        }, item.Value);
+      } else {
+        renderedValue = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("span", {
+          key: "lvd-propertysheet-item-value"
+        }, item.Value);
+      }
+
+      var renderedValueAction = null;
+
+      if (this._hasAction(item)) {
+        renderedValueAction = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement(_fluentui_react__WEBPACK_IMPORTED_MODULE_8__.IconButton, {
+          key: "lvd-propertysheet-item-value-action",
+          iconProps: {
+            iconName: item.Action.Icon
+          },
+          onClick: this._handleItemValueActionClicked.bind(this, item, itemIndex)
+        });
+      }
+
+      var output = [renderedValue];
+
+      if (renderedValueAction != null) {
+        output.push(renderedValueAction);
+      }
+
+      return this._shouldFormatValuesAsCode(item) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("pre", null, output) : output;
+    }
+  }, {
+    key: "_hasUrl",
+    value: function _hasUrl(item) {
+      return item.hasOwnProperty('Url') && !!item.Url;
+    }
+  }, {
+    key: "_shouldUnderlineValueLinks",
+    value: function _shouldUnderlineValueLinks() {
+      return !!this.props.underlineValueLinks;
+    }
+  }, {
+    key: "_hasAction",
+    value: function _hasAction(item) {
+      return item.hasOwnProperty('Action') && !!item.Action && !!item.Action.Code && !!item.Action.Icon;
+    }
+  }, {
+    key: "_handleItemValueActionClicked",
+    value: function _handleItemValueActionClicked(item, itemIndex, event) {
+      if (this.props.onValueItemActionInvoked != null) {
+        this.props.onValueItemActionInvoked(item, itemIndex, event);
+      }
     }
   }, {
     key: "_shouldFormatValuesAsCode",
@@ -229,8 +286,10 @@ PropertySheet.propTypes = {
   items: prop_types__WEBPACK_IMPORTED_MODULE_7___default().arrayOf((prop_types__WEBPACK_IMPORTED_MODULE_7___default().object)).isRequired,
   labelOnly: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().bool),
   labelAlignment: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().string),
+  underlineValueLinks: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().bool),
   onRenderLabel: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func),
-  onRenderValue: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func)
+  onRenderValue: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func),
+  onValueItemActionInvoked: (prop_types__WEBPACK_IMPORTED_MODULE_7___default().func)
 };
 
 /***/ }),
@@ -404,6 +463,12 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__12__;
 
 /***/ }),
 /* 13 */
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__13__;
+
+/***/ }),
+/* 14 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -491,9 +556,12 @@ var __webpack_exports__ = {};
 (() => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PropertySheetLabelAlignments": () => (/* reexport safe */ _PropertySheetLabelAlignments_js__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   "PropertySheet": () => (/* reexport safe */ _PropertySheet_jsx__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
 /* harmony import */ var _PropertySheet_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var _PropertySheetLabelAlignments_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(14);
+
 
 
 })();

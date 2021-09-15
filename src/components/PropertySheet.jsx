@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { 
+	Link, 
+	IconButton 
+} from '@fluentui/react';
+
 import PropertySheetLabelAlignments from './PropertySheetLabelAlignments';
 
 export default class PropertySheet extends React.Component {
@@ -98,7 +103,15 @@ export default class PropertySheet extends React.Component {
 
 	_renderItemLabel(item, itemIndex) {
 		const renderer = this._getItemLabelRenderer();
-		return renderer(item, itemIndex);
+		const labelAlignment = this._getLabelAlignment();
+		const labelAlignmentClassName = this._computeLabelAlignmentCssClassName(labelAlignment);
+		const labelClassName = `ms-Grid-col ms-sm6 ms-md4 lvd-propertysheet-key-value-item-key ${labelAlignmentClassName}`;
+
+		return (
+			<div className={labelClassName}>
+				{renderer(item, itemIndex)}
+			</div>
+		);
 	}
 
 	_getItemLabelRenderer() {
@@ -106,13 +119,7 @@ export default class PropertySheet extends React.Component {
 	}
 
 	_defaultLabelRenderer(item, itemIndex) {
-		const labelAlignment = this._getLabelAlignment();
-		const labelAlignmentClassName = this._computeLabelAlignmentCssClassName(labelAlignment);
-		const labelClassName = `ms-Grid-col ms-sm6 ms-md4 lvd-propertysheet-key-value-item-key ${labelAlignmentClassName}`;
-
-		return (
-			<div className={labelClassName}>{item.Label}</div>
-		);
+		return item.Label;
 	}
 
 	_computeLabelAlignmentCssClassName(labelAlignment) {
@@ -128,7 +135,11 @@ export default class PropertySheet extends React.Component {
 
 	_renderItemValue(item, itemIndex) {
 		const renderer = this._getItemValueRenderer();
-		return renderer(item, itemIndex);
+		return (
+			<div className="ms-Grid-col ms-sm6 ms-md8 lvd-propertysheet-key-value-item-value">
+				{renderer(item, itemIndex)}
+			</div>
+		);
 	}
 
 	_getItemValueRenderer() {
@@ -136,13 +147,59 @@ export default class PropertySheet extends React.Component {
 	}
 
 	_defaultValueRenderer(item, itemIndex) {
-		return (
-			<div className="ms-Grid-col ms-sm6 ms-md8 lvd-propertysheet-key-value-item-value">
-				{this._shouldFormatValuesAsCode(item)
-					? <pre>{item.Value}</pre> 
-					: item.Value}
-			</div>
-		);
+		let renderedValue = null;
+		if (this._hasUrl(item)) {
+			renderedValue = (
+				<Link key="lvd-propertysheet-item-value" href={item.Url} underline={this._shouldUnderlineValueLinks()}>{item.Value}</Link>
+			);
+		} else {
+			renderedValue = (
+				<span key="lvd-propertysheet-item-value">{item.Value}</span>
+			);
+		}
+
+		let renderedValueAction = null;
+		if (this._hasAction(item)) {
+			renderedValueAction = (
+				<IconButton 
+					key="lvd-propertysheet-item-value-action"
+					iconProps={{ iconName: item.Action.Icon }} 
+					onClick={this._handleItemValueActionClicked.bind(this, item, itemIndex)}
+				/>
+			);
+		}
+
+		const output = [renderedValue];
+		if (renderedValueAction != null) {
+			output.push(renderedValueAction);
+		}
+		
+		return this._shouldFormatValuesAsCode(item)
+			? <pre>{output}</pre> 
+			: output;
+	}
+
+	_hasUrl(item) {
+		return item.hasOwnProperty('Url') && !!item.Url;
+	}
+
+	_shouldUnderlineValueLinks() {
+		return !!this.props.underlineValueLinks;
+	}
+
+	_hasAction(item) {
+		return item.hasOwnProperty('Action') 
+			&& !!item.Action 
+			&& !!item.Action.Code 
+			&& !!item.Action.Icon;
+	}
+
+	_handleItemValueActionClicked(item, itemIndex, event) {
+		if (this.props.onValueItemActionInvoked != null) {
+			this.props.onValueItemActionInvoked(item, 
+				itemIndex, 
+				event);
+		}
 	}
 
 	_shouldFormatValuesAsCode(item) {
@@ -159,6 +216,8 @@ PropertySheet.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.object).isRequired,
 	labelOnly: PropTypes.bool,
 	labelAlignment: PropTypes.string,
+	underlineValueLinks: PropTypes.bool,
 	onRenderLabel: PropTypes.func,
-	onRenderValue: PropTypes.func
+	onRenderValue: PropTypes.func,
+	onValueItemActionInvoked: PropTypes.func
 };
