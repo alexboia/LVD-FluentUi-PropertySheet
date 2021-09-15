@@ -1,5 +1,7 @@
 # LVD-FluentUi-PropertySheet
 
+[![NPM](https://nodei.co/npm/lvd-fluentui-propertysheet.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/lvd-fluentui-propertysheet/)
+
 A ReactJS property sheet component built using the [FluentUI library](https://github.com/microsoft/fluentui).
 What this basically does is display key-value data, with some additional features:
 
